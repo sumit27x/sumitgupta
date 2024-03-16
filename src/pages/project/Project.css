@@ -1,0 +1,153 @@
+.card-container {
+  padding: 3rem 0rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.swiper-slide {
+  position: relative;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-content {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+  width: 280px;
+  height: 400px;
+  padding: 10px;
+  border-radius: 15px;
+  background: linear-gradient(136deg, #6e6e6e, #181616, #000000);
+}
+
+.card-content::before,
+.card-content::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  background: linear-gradient(
+    45deg,
+    #000000,
+    #181616,
+    #2d2b2b,
+    #434141,
+    #5a5858,
+    #737070,
+    #e7e4e4,
+    #2d2b2b,
+    #181616,
+    #000000
+  );
+  background-size: 280%;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  z-index: -1;
+  animation: box 20s linear infinite;
+  border-radius: 18px;
+}
+.card-content::after {
+  filter: blur(15px);
+}
+@keyframes box {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-link {
+  display: flex;
+  align-items: center;
+}
+.card-img {
+  display: block;
+  object-fit: cover;
+  width: 260px;
+  height: 100%;
+  border-radius: 8px;
+}
+.card-icon {
+  font-size: 20px;
+}
+
+.card-info {
+  padding: 5px 0px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-info p {
+  color: #cccccc;
+}
+.card-description {
+  text-align: start;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.card-link {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0.75rem;
+  justify-content: flex-end;
+}
+
+/*----------------------------------Responsive------------------------------------------*/
+@media screen and (max-width: 992px) {
+  .card-container {
+    width: initial;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+}
+
+@media screen and (max-width: 576px) {
+  .card-description {
+    font-size: 0.813rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .card-content {
+    width: 230px;
+    height: 350px;
+  }
+  .project-name{
+    font-size: 15px;
+  }
+  .card-head {
+    font-size: 0.813rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-img {
+    width: 210px;
+    height: auto;
+  }
+  .card-title {
+    font-size: 15px;
+  }
+  .card-description {
+    font-size: 12px;
+  }
+}

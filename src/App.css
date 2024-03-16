@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  font-family: "Poppins", sans-serif;
   color: white;
+  text-decoration: none;
+  list-style: none;
+}
+::-webkit-scrollbar{
+  width: 5px;
+  scrollbar-width: smooth;
+}
+::-webkit-scrollbar-thumb{
+  color: #a1a1a1;
+}
+button{
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+}
+.page-container {
+  overflow-x: hidden !important;
+}
+.container {
+  max-width: 968px;
+  margin-right: auto;
+  margin-left: auto;
+  /* padding: 0 2rem; */
 }
 
-.App-link {
-  color: #61dafb;
+
+.section-title {
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 50px;
+  padding-bottom: 20px;
+}
+.section-subtitle {
+  text-transform: uppercase;
+  color: #cccccc;
+  font-weight: 300;
+}
+.section-description {
+  color: #cccccc;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+/* ======================================================================================================= */
+
+@media screen and (max-width: 992px) {
+  .container {
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
   }
-  to {
-    transform: rotate(360deg);
+  .button {
+    padding: 1rem 1.75rem;
+  }
+}
+
+/* for laptop device*/
+@media screen and (max-width: 768px) {
+  .container{
+    margin-left: 1rem;
+    margin-right:1rem ;
+  }
+  
+}
+
+/* for small device*/
+@media screen and (max-width: 576px) {
+  .container{
+    margin-left: 1rem;
+    margin-right: 1rem ;
+  }
+  
+}
+
+/* for small device*/
+@media screen and (max-width: 350px) {
+  .conatiner{
+    margin-left: 1rem;
+    margin-right:1rem ;
+  }
+  .section-description{
+    font-size: 13px;
+  }
+  .section-subtitle{
+    font-size: 13px;
+  }
+  .section-title{
+    font-size: 35px;
+  padding-bottom: 0px;
+
   }
 }
