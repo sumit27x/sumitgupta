@@ -83,7 +83,7 @@ export function IconCloud({ iconSlugs }: IconCloudProps) {
   }, [data, theme]);
 
   return (
-    // @ts-ignore
+    // @ts-expect-error This error is due to type incompatibility with the Cloud component's props
     <Cloud {...cloudProps}>{renderedIcons}</Cloud>
   );
 }

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
-import { workExperience, workExperiences } from "@/data";
+import { workExperiences } from "@/data";
 import { IconCloudDemo } from "./magicui/IconCloudDemo";
+import Image from "next/image"; // Import Image
 
 const Experience = () => {
-  const [animationName, setAnimationName] = useState("idle");
+  const [animationName, setAnimationName] = useState("idle"); // Keep this if you plan to use it
+  console.log(animationName);
 
   return (
     <div className="py-20 w-full">
@@ -26,33 +27,35 @@ const Experience = () => {
                   setAnimationName(item.animation.toLowerCase())
                 }
                 onPointerOut={() => setAnimationName("idle")}
-                className="grid grid-cols-[auto_1fr] items-start gap-15 transition-all ease-in-out duration-500 cursor-pointer hover:bg-black-300 rounded-lg sm:px-5 lg:gap-5  group "
+                className="grid grid-cols-[auto_1fr] items-start gap-15 transition-all ease-in-out duration-500 cursor-pointer hover:bg-black-300 rounded-lg sm:px-5 lg:gap-5 group"
               >
                 <div className="flex flex-col h-full justify-start items-center py-2">
                   <div className="rounded-3xl w-16 h-16 p-2 bg-black-600">
-                    <img className="w-full h-full" src={item.icon} alt="" />
+                    <Image
+                      className="w-full h-full"
+                      src={item.icon}
+                      alt=""
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <div className="flex-1 w-0.5 mt-4 h-full bg-black-300 group-hover:bg-black-500 group-last:hidden" />
                 </div>
 
                 <div className="sm:p-5 px-2.5 py-5">
-                  <p className="font-bold  group-hover:text-white transition-all ease-in-out duration-500">
+                  <p className="font-bold group-hover:text-white transition-all ease-in-out duration-500">
                     {item.name}
                   </p>
                   <p className="text-sm mb-5 text-gray-300 group-hover:text-white transition-all ease-in-out duration-500 ">
-                    <span>{item.pos}</span> -- {""}
+                    <span>{item.pos}</span> --{" "}
                     <span className="block sm:inline">{item.duration}</span>
                   </p>
-                  {/* <p className="text-gray-400 group-hover:text-white transition-all ease-in-out duration-500">
-                    {item.title}
-                  </p> */}
 
                   {item.points && Array.isArray(item.points) && (
                     <ul className="mt-5 list-disc ml-5 space-y-2">
                       {item.points.map((point, index) => (
                         <li
                           key={`experience-point-${index}`}
-                          // className="text-white-100 text-[14px] pl-1 tracking-wider"
                           className="text-gray-400 group-hover:text-white transition-all ease-in-out duration-500 text-[14px] pl-1 tracking-wider"
                         >
                           {point}
