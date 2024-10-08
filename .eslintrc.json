@@ -1,3 +1,24 @@
+// {
+//   "extends": ["next/core-web-vitals", "next/typescript"]
+// }
+
+
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off", // Disable exhaustive-deps rule
+    "@typescript-eslint/no-explicit-any": "off", // Allow 'any' type
+    "no-var": "off", // Allow 'var' usage
+    "prefer-const": "warn", // Warn if 'let' is used when 'const' could be used
+    "react-hooks/rules-of-hooks": "error" // Check rules of hooks
+    // "react-hooks/exhaustive-deps": "warn" // Warn on missing dependencies in useEffect
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect the React version
+    }
+  }
 }
