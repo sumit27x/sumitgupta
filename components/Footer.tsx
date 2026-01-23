@@ -42,7 +42,7 @@ const Footer = () => {
       <div className="relative z-10 flex mt-16 md:flex-row flex-col justify-between items-center w-full">
         {/* Copyright text */}
         <p className="md:text-base text-sm md:font-normal font-light">
-          Copyright © 2024 Sumit Gupta
+          Copyright © 2026 Sumit Gupta
         </p>
 
         {/* Social media icons */}
