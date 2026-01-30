@@ -115,6 +115,20 @@ export const projects = [
     link: "https://online.nmims.edu/",
   },
 
+    {
+    id: 3,
+    title: "HoliMela Lovebraj",
+    des: "A grand Holi festival digital campaign project celebrating colors, culture, and the soul of Braj.",
+    img: "/project/holimela-lovebraj.png",
+    iconLists: [
+      "/icon/next.svg",
+      "/icon/bootstrap.svg",
+      "/icon/js.svg",
+      "/icon/laravel.svg",
+      "/icon/gsap.svg",
+    ],
+    link: "https://holimela.lovebraj.com/",
+  },
   {
     id: 4,
     title: "Simpolo",
@@ -533,11 +547,21 @@ export const workExperiences = [
     icon: "/keystone.svg",
     animation: "victory",
     points: [
-      "Build responsive and dynamic user interfaces using Next.js and GSAP for smooth animations and interactions.",
-      "Build and maintain server-side logic using Node.js ensuring smooth API integration and data handling.",
-      "Monitor and optimize the performance of the application post-deployment, identifying potential issues and improving efficiency.",
-      "Reduced integration issues by 45% through effective collaboration with backend teams.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Developed a scalable multi-role admin dashboard using Next.js, supporting role-based access for Super Admin, Admin, and Guards with secure permission control.",
+      "Built responsive, high-performance user interfaces with Next.js, Tailwind CSS, and GSAP, delivering smooth animations and modern user experiences.",
+      "Implemented key dashboard modules including HRM management, complaint handling systems, user profiles, and detailed reporting pages.",
+      "Integrated interactive analytics and chart-based visualizations, enabling real-time insights through dynamic dashboard widgets.",
+      "Optimized application performance and scalability through continuous monitoring, debugging, and post-deployment enhancements.",
+      "Reduced integration issues by 45% through effective cross-team collaboration, clean code practices, and structured code reviews.",
+
+
+      // "Build responsive and dynamic user interfaces using Next.js and GSAP for smooth animations and interactions.",
+      // "Build and maintain server-side logic using Node.js ensuring smooth API integration and data handling.",
+      // "Monitor and optimize the performance of the application post-deployment, identifying potential issues and improving efficiency.",
+      // "Reduced integration issues by 45% through effective collaboration with backend teams.",
+      // "Participating in code reviews and providing constructive feedback to other developers.",
+
+
       // "Customize and develop Wordpress websites, themes, and plugins tailored to specific client needs across various business sectors",
 
       //       "Build responsive and dynamic user interfaces using Next.js and GSAP for smooth animations and interactions.",

@@ -1,13 +1,11 @@
 "use client";
-import React from "react";
-import { FaLocationArrow } from "react-icons/fa6";
-import { useEffect, useRef, useState, useMemo } from "react";
-import Image from "next/image";
-import { projects } from "@/data";
-// Import PinContainer only if you plan to use it
-// import { PinContainer } from "./ui/Pin";
 
-interface ProjectItem {
+import React, { useEffect, useRef, useState, memo } from "react";
+import Image from "next/image";
+import { FaLocationArrow } from "react-icons/fa6";
+import { projects } from "@/data";
+
+interface ProjectItemType {
   id: number;
   img: string;
   title: string;
@@ -16,143 +14,124 @@ interface ProjectItem {
   link: string;
 }
 
-// Memoized ProjectItem component with display name
-const ProjectItem = React.memo(
-  function ProjectItem({ item, isVisible }: { item: ProjectItem; isVisible: boolean }) {
-    return (
-      <div
-        className="relative flex items-center justify-center"
-        style={{ width: "100%", maxWidth: "21rem", height: "26rem" }}
-        key={item.id}
-      >
-        {/* Animated border */}
-        <div className="absolute inset-0 rounded-2xl p-[1px] overflow-hidden">
-          <span
-            className={`absolute inset-[-1000%] ${
-              isVisible ? "animate-[spin_2s_linear_infinite]" : ""
-            } bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]`}
-          ></span>
-          {/* Card content */}
-          <div className="relative w-full h-full rounded-2xl bg-black p-5">
-            <div className="relative flex items-center justify-center w-full h-[12rem] overflow-hidden mb-6">
-              <div
-                className="relative w-full h-full overflow-hidden rounded-2xl"
-                style={{ backgroundColor: "#13162D" }}
-              >
-                <Image
-                  src="/bg.png"
-                  alt="bgimg"
-                  layout="fill"
-                  objectFit="cover"
-                  loading="lazy"
-                />
-              </div>
-              <Image
-                src={item.img}
-                alt="cover"
-                layout="fill"
-                objectFit="cover"
-                priority={false}
-                loading="lazy"
-                className="rounded-2xl"
-              />
-            </div>
+/* ----------------------------------------------------------
+   ✅ Optimized Project Card Component
+---------------------------------------------------------- */
+const ProjectCard = memo(({ item }: { item: ProjectItemType }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [animate, setAnimate] = useState(false);
 
-            <h1 className="font-bold text-lg line-clamp-1">{item.title}</h1>
-
-            <p className="my-2 text-base font-light text-gray-400 line-clamp-2">
-              {item.des}
-            </p>
-
-            <div className="flex items-center justify-between mt-5">
-              <div className="flex items-center">
-                {useMemo(
-                  () =>
-                    item.iconLists.map((icon: string, index: number) => (
-                      <div
-                        key={index}
-                        className="border border-white/[.2] rounded-full bg-black w-8 h-8 flex justify-center items-center"
-                        style={{
-                          transform: `translateX(-${5 * index}px)`,
-                        }}
-                      >
-                        <Image
-                          src={icon}
-                          alt="icon"
-                          layout="fill"
-                          objectFit="contain"
-                          loading="lazy"
-                          className="rounded-full"
-                        />
-                      </div>
-                    )),
-                  [item.iconLists]
-                )}
-              </div>
-
-              <div className="flex justify-center items-center">
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer" // Improve security
-                  className="flex text-sm text-purple"
-                >
-                  Check Live Site
-                </a>
-                <FaLocationArrow className="ms-3" color="#CBACF9" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-);
-
-const RecentProjects = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const projectRef = useRef<HTMLDivElement>(null);
-
+  // ✅ Each card animates only when visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
+        setAnimate(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.3,
+      }
     );
 
-    const currentRef = projectRef.current; // Store the current ref in a variable
+    if (cardRef.current) observer.observe(cardRef.current);
 
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
-  // Memoize projects to avoid unnecessary re-renders
-  const memoizedProjects = useMemo(() => projects, []);
-
   return (
-    <div className="py-20" id="projects" ref={projectRef}>
+    <div
+      ref={cardRef}
+      className="relative flex items-center justify-center"
+      style={{ width: "100%", maxWidth: "21rem", height: "26rem" }}
+    >
+      {/* ✅ Animated Border */}
+      <div className="absolute inset-0 rounded-2xl p-[1px] overflow-hidden">
+        <span
+          className={`absolute inset-[-1000%] will-change-transform
+          bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]
+          ${animate ? "animate-[spin_2s_linear_infinite]" : ""}`}
+        ></span>
+
+        {/* ✅ Card Content */}
+        <div className="relative w-full h-full rounded-2xl bg-black p-5">
+          {/* Image Section */}
+          <div className="relative w-full h-[12rem] overflow-hidden rounded-lg mb-6">
+            <Image
+              src={item.img}
+              alt="project cover"
+              fill
+              className="object-cover rounded-lg"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Title */}
+          <h1 className="font-bold text-lg line-clamp-1">{item.title}</h1>
+
+          {/* Description */}
+          <p className="my-2 text-sm font-light text-gray-400 line-clamp-2">
+            {item.des}
+          </p>
+
+          {/* Footer */}
+          <div className="flex items-center justify-between mt-5">
+            {/* Icons */}
+            <div className="flex items-center">
+              {item.iconLists.map((icon, index) => (
+                <div
+                  key={index}
+                  className="border border-white/[0.2] rounded-full bg-black w-8 h-8 flex justify-center items-center"
+                  style={{
+                    transform: `translateX(-${5 * index}px)`,
+                  }}
+                >
+                  {/* ✅ Optimized Icon Image */}
+                  <Image
+                    src={icon}
+                    alt="tech icon"
+                    width={18}
+                    height={18}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Link */}
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-sm text-purple-400"
+            >
+              Check Live
+              <FaLocationArrow className="ms-2" color="#CBACF9" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+ProjectCard.displayName = "ProjectCard";
+
+/* ----------------------------------------------------------
+   ✅ Recent Projects Section
+---------------------------------------------------------- */
+const RecentProjects = () => {
+  return (
+    <section className="py-20" id="projects">
       <h1 className="heading">
         A small selection of{" "}
         <span className="text-purple">recent projects</span>
       </h1>
-      <div className="flex flex-wrap items-center justify-center p-4 gap-10 mt-10">
-        {memoizedProjects.map((item: ProjectItem) => (
-          <ProjectItem item={item} isVisible={isVisible} key={item.id} />
+
+      <div className="flex flex-wrap items-center justify-center gap-10 mt-10">
+        {projects.map((item: ProjectItemType) => (
+          <ProjectCard key={item.id} item={item} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
