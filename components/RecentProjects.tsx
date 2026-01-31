@@ -88,8 +88,8 @@ const ProjectCard = memo(({ item }: { item: ProjectItemType }) => {
                   <Image
                     src={icon}
                     alt="tech icon"
-                    width={18}
-                    height={18}
+                    width={20}
+                    height={20}
                     loading="lazy"
                   />
                 </div>
@@ -97,15 +97,17 @@ const ProjectCard = memo(({ item }: { item: ProjectItemType }) => {
             </div>
 
             {/* Link */}
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-sm text-purple-400"
-            >
-              Check Live
-              <FaLocationArrow className="ms-2" color="#CBACF9" />
-            </a>
+             <div className="flex justify-center items-center">
+                <a
+                   href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer" // Improve security
+                  className="flex text-sm text-purple"
+                >
+                  Check Live Site
+                </a>
+                <FaLocationArrow className="ms-2" color="#CBACF9" />
+              </div>
           </div>
         </div>
       </div>
